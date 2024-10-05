@@ -17,5 +17,5 @@ jobs:
           arch: arm64
           aosp-gcc: true
           aosp-clang: false
-          android-version: 10
+          android-version: 12
           extra-cmd: ANDROID_MAJOR_VERSION=o
