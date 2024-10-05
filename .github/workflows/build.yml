@@ -14,8 +14,8 @@ jobs:
           kernel-url: https://github.com/Marco-cefetmg/android_kernel_samsung_exynos7870
           kernel-branch: master
           config: exynos7870-gtanotexllte_defconfig
-          arch: arm64
           aosp-gcc: true
-          aosp-clang: false
+          aosp-clang: true
           android-version: 12
+          aosp-clang-version: r383902
           extra-cmd: ANDROID_MAJOR_VERSION=o
