@@ -1,36 +1,22 @@
-name: Build on Tag
+name: CI
 
 on:
   workflow_dispatch:
-  push:
-    tags: '*'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  build-kernel:
+    name: Build Kernel
+    runs-on: ubuntu-20.04
     steps:
-    - name: Checkout kernel source
-      uses: actions/checkout@v2
-
-    - name: Checkout zipper
-      uses: actions/checkout@v2
-      with:
-        repository: lemniskett/AnyKernel3
-        path: zipper
-
-    - name: Android kernel build
-      uses: lemniskett/android-kernel-actions@master
-      id: build
-      env:
-        NAME: Dark-Ages-Último
-      with:
-        arch: arm64
-        compiler: gcc/10
-        defconfig: exynos7870-gtanotexllte_defconfig
-        image: Image.gz
-
-    - name: Release build
-      uses: ncipollo/release-action@v1
-      with:
-        artifacts: ${{ steps.build.outputs.outfile }}
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build
+        uses: dabao1955/kernel_build_action@main
+        with:
+          kernel-url: https://github.com/Marco-cefetmg/android_kernel_samsung_exynos7870
+          kernel-branch: master
+          config: exynos7870-gtanotexllte_defconfig
+          arch: arm64
+          aosp-gcc: true
+          aosp-clang: false
+          android-version: 10
+          aosp-clang-version: r383902
+          extra-cmd: ANDROID_MAJOR_VERSION=o
