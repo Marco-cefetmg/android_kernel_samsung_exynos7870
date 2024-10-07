@@ -3,7 +3,8 @@ name: Build kernels
 on:
   push:
     paths:
-      - "./"
+      - ".github/workflows/kernel.yml"
+      - ".github/workflows/gtanotexllte.config.json"
   workflow_dispatch:
   schedule:
     - cron: "14 13 * * 5"
@@ -200,7 +201,7 @@ jobs:
           ARCH=$(echo $PARAMS | jq -r ".ARCH")
           CC=$(echo $PARAMS | jq -r ".CC")
 
-          args="-j${{ env.THREAD }} O=${{ env.OUT_DIR }} ARCH=$ARCH"
+          args="-j${{ env.THREAD }}  ARCH=$ARCH"
           if [ -n "$CC" ]; then
 
             if [[ "$CC" == *"/"* ]]; then
@@ -301,7 +302,6 @@ jobs:
           echo "🤔 PATH Variable: $PATH"
           export KBUILD_BUILD_HOST=Github-Action
           export KBUILD_BUILD_USER=$(echo ${{ github.actor }} | tr A-Z a-z)
-          make mrproper
           make ${{ env.ARGS }} ${{ env.KERNEL_DEFCONFIG_PATH }}
           make ${{ env.ARGS }}
           # tree ${{ env.OUT_DIR }}
