@@ -21,6 +21,7 @@
       "CC": "aarch64-linux-android-gcc",
       "externalCommands": {
         "CROSS_COMPILE": "aarch64/bin/aarch64-linux-android-",
+        "ANDROID_PLATFORM_VERSION": "8.1",
         "ANDROID_MAJOR_VERSION": "o"
       }
     },
