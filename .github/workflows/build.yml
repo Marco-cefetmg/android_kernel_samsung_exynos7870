@@ -2,8 +2,6 @@ name: Build kernels
 
 on:
   push:
-    paths:
-      - "./*"
   workflow_dispatch:
   schedule:
     - cron: "14 13 * * 5"
