@@ -1,7 +1,7 @@
 export ARCH=arm64
 export CROSS_COMPILE=~/android/toolchains/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 export ANDROID_MAJOR_VERSION=o
-make exynos7870-gtanotexllte_defconfig
+make nethunter_defconfig
 CONFIG_DEBUG_SECTION_MISMATCH=y make -j4
 
 if [ ! -d "AnyKernel3" ]; then

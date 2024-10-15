@@ -3,9 +3,9 @@
     "kernelSource": {
       "name": "android_kernel_samsung_exynos7870",
       "repo": "https://github.com/Marco-cefetmg/android_kernel_samsung_exynos7870",
-      "branch": "main",
+      "branch": "nethunter",
       "device": "gtanotexllte",
-      "defconfig": "exynos7870-gtanotexllte_defconfig"
+      "defconfig": "nethunter_defconfig"
     },
     "toolchains": [
       {
