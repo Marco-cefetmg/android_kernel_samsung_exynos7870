@@ -1,0 +1,155 @@
+#
+# NOTE! Don't add files that are generated in specific
+# subdirectories here. Add them in the ".gitignore" file
+# in that subdirectory instead.
+#
+# NOTE! Please use 'git ls-files -i --exclude-standard'
+# command after changing this file, to see if there are
+# any tracked files which get ignored after the change.
+#
+# Normal rules
+#
+.*
+*.o
+*.o.*
+*.a
+*.s
+*.ko
+*.so
+*.so.dbg
+*.mod.c
+*.i
+*.lst
+*.symtypes
+*.order
+*.elf
+*.bin
+*.gz
+*.bz2
+*.lzma
+*.xz
+*.lz4
+*.lzo
+*.patch
+*.gcno
+modules.builtin
+Module.symvers
+*.dwo
+
+#
+# Top-level generic files
+#
+/tags
+/TAGS
+/linux
+/vmlinux
+/vmlinuz
+/System.map
+/Module.markers
+
+#
+# Debian directory (make deb-pkg)
+#
+/debian/
+
+#
+# git files that we don't want to ignore even it they are dot-files
+#
+!.gitignore
+!.mailmap
+
+#
+# Generated include files
+#
+include/config
+include/generated
+arch/*/include/generated
+
+# stgit generated dirs
+patches-*
+
+# quilt's files
+patches
+series
+
+# cscope files
+cscope.*
+ncscope.*
+
+# gnu global files
+GPATH
+GRTAGS
+GSYMS
+GTAGS
+
+*.orig
+*~
+\#*#
+
+#
+# Leavings from module signing
+#
+extra_certificates
+signing_key.priv
+signing_key.x509
+x509.genkey
+
+# Kconfig presets
+all.config
+
+# kali-nethunter folder
+kali-nethunter-kernel/
+
+# generated kernel files
+usr/gen_init_cpio
+security/selinux_n/flask.h
+security/selinux_n/av_permissions.h
+scripts/selinux/mdp/mdp
+scripts/selinux/genheaders/genheaders
+scripts/mod/modpost
+scripts/mod/mk_elfconfig
+scripts/mod/elfconfig.h
+scripts/mod/devicetable-offsets.h
+scripts/kconfig/zconf.tab.c
+scripts/kconfig/zconf.lex.c
+scripts/kconfig/zconf.hash.c
+scripts/kconfig/conf
+scripts/genksyms/parse.tab.h
+scripts/genksyms/parse.tab.c
+scripts/genksyms/lex.lex.c
+scripts/genksyms/keywords.hash.c
+scripts/genksyms/genksyms
+scripts/dtc/dtc-parser.tab.h
+scripts/dtc/dtc-parser.tab.c
+scripts/dtc/dtc-lexer.lex.c
+scripts/dtc/dtc
+scripts/basic/fixdep
+scripts/basic/bin2c
+scripts/sortextable
+scripts/kallsyms
+net/wireless/regdb.c
+lib/gen_crc32table
+lib/crc32table.h
+kernel/time/timeconst.h
+kernel/time/hz.bc
+kernel/config_data.h
+firmware/tsp_stm/stm_gtaxl.fw.gen.S
+firmware/tsp_stm/stm_gtaxl.fw
+firmware/tsp_stm/matisse.fw.gen.S
+firmware/tsp_stm/matisse.fw
+firmware/tsp_stm/fts1a096_gtaxl_rev03.fw.gen.S
+firmware/tsp_stm/fts1a096_gtaxl_rev03.fw
+firmware/tsp_stm/fts1a096_gtaxl_note.fw.gen.S
+firmware/tsp_stm/fts1a096_gtaxl_note.fw
+firmware/epen/w9019_gtaxlnote.bin.gen.S
+firmware/epen/w9019_gtaxlnote_rev00.bin.gen.S
+firmware/gnss_firmware.bin.gen.S
+arch/arm64/kernel/vdso/vdso.lds
+arch/arm64/kernel/vdso/vdso-offsets.h
+arch/arm64/kernel/vmlinux.lds
+arch/arm64/boot/dts/exynos7870-universal7870.dtb
+arch/arm64/boot/dts/exynos7870-universal7870_rev01.dtb
+arch/arm64/boot/dts/exynos7870-universal7870_rev01_treble_off.dtb
+arch/arm64/boot/dts/exynos7870-smdk7870.dtb
+arch/arm64/boot/Image
+source
