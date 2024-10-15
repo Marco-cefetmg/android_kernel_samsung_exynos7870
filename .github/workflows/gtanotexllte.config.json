@@ -1,0 +1,35 @@
+[
+  {
+    "kernelSource": {
+      "name": "android_kernel_samsung_exynos7870",
+      "repo": "https://github.com/Marco-cefetmg/android_kernel_samsung_exynos7870",
+      "branch": "main",
+      "device": "gtanotexllte",
+      "defconfig": "exynos7870-gtanotexllte_defconfig"
+    },
+    "toolchains": [
+      {
+        "repo": "https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9",
+        "branch": "oreo-cts-release",
+        "name": "aarch64",
+        "binaryEnv": ["bin"]
+      }
+    ],
+    "enableCcache": false,
+    "params": {
+      "ARCH": "arm64",
+      "CC": "aarch64-linux-android-gcc",
+      "externalCommands": {
+        "CROSS_COMPILE": "aarch64/bin/aarch64-linux-android-",
+        "ANDROID_PLATFORM_VERSION": "8.1",
+        "ANDROID_MAJOR_VERSION": "o"
+      }
+    },
+    "AnyKernel3": {
+      "use": true,
+      "release": true
+    },
+    "enableKernelSU": false,
+    "enableLXC": false
+  }
+]
