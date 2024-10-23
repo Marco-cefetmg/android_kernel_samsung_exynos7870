@@ -1,8 +1,10 @@
+#!/bin/bash
 export ARCH=arm64
 export CROSS_COMPILE=~/android/toolchains/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 export ANDROID_MAJOR_VERSION=o
+# make mrproper
 make exynos7870-gtanotexllte_defconfig
-CONFIG_DEBUG_SECTION_MISMATCH=y make -j4
+make -j4
 
 if [ ! -d "AnyKernel3" ]; then
 	git clone --recursive --depth=1 -j $(nproc) https://github.com/osm0sis/AnyKernel3 AnyKernel3
@@ -24,12 +26,25 @@ if [ ! -d "AnyKernel3" ]; then
 	sed -i 's/append_file fstab.tuna "usbdisk" fstab;/#&/g' AnyKernel3/anykernel.sh
 fi
 
-mv arch/arm64/boot/Image* AnyKernel3
-cd AnyKernel3/
-zip -r9 AnyKernel3-update.zip * -x .git README.md *placeholder
+cp arch/arm64/boot/Image* AnyKernel3
+cd AnyKernel3/ && zip -r9 AnyKernel3-update.zip * -x .git README.md *placeholder && cd ..
+
 # qrencode -t ansiutf8 $(curl bashupload.com -T AnyKernel3-update.zip | grep -Eo "http:\/\/([^\/]*)\/(.*)$")
-adb reboot recovery
-read -p "press enter:"
-adb sideload AnyKernel3-update.zip
-cd ..
-rm -rf AnyKernel3/Image*
+for ((i = 0 ; i < 20 ; i++ )); do 
+	if adb devices | grep -qw device; then
+		adb reboot recovery
+	elif adb devices | grep -q recovery; then
+		adb shell twrp sideload
+	elif adb devices | grep -q sideload; then
+		adb sideload AnyKernel3/AnyKernel3-update.zip
+		sleep 2
+		adb reboot
+		break
+	else
+		sleep 2
+	fi
+done
+
+#cd ..
+#rm -rf AnyKernel3/Image*
+#rm -rf AnyKernel3/AnyKernel3-update.zip

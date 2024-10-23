@@ -3,7 +3,7 @@
     "kernelSource": {
       "name": "android_kernel_samsung_exynos7870",
       "repo": "https://github.com/Marco-cefetmg/android_kernel_samsung_exynos7870",
-      "branch": "main",
+      "branch": "stock-qcacld-2.0",
       "device": "gtanotexllte",
       "defconfig": "exynos7870-gtanotexllte_defconfig"
     },
