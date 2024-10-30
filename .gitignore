@@ -153,3 +153,6 @@ arch/arm64/boot/dts/exynos7870-universal7870_rev01_treble_off.dtb
 arch/arm64/boot/dts/exynos7870-smdk7870.dtb
 arch/arm64/boot/Image
 source
+
+logcat_*.log
+AnyKernel3
