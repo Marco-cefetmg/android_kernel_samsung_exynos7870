@@ -4,11 +4,12 @@ export CROSS_COMPILE=~/android/toolchains/aarch64-linux-android-4.9/bin/aarch64-
 export ANDROID_MAJOR_VERSION=o
 # make mrproper
 make exynos7870-gtanotexllte_defconfig
-make -j4
+make -j$(nproc)
 
 if [ ! -d "AnyKernel3" ]; then
 	git clone --recursive --depth=1 -j $(nproc) https://github.com/osm0sis/AnyKernel3 AnyKernel3
 	sed -i 's/kernel.string=ExampleKernel by osm0sis @ xda-developers/kernel.string=TestKernel by Marco-cefetmg @ xda-developers/g' AnyKernel3/anykernel.sh
+	sed -i 's/do.modules=0/do.modules=1/g' AnyKernel3/anykernel.sh
 	sed -i 's/device.name1=maguro/device.name1=gtanotexllte/g' AnyKernel3/anykernel.sh
 	sed -i 's/device.name2=toro/device.name2=/g' AnyKernel3/anykernel.sh
 	sed -i 's/device.name3=toroplus/device.name3=/g' AnyKernel3/anykernel.sh
@@ -27,17 +28,21 @@ if [ ! -d "AnyKernel3" ]; then
 fi
 
 cp arch/arm64/boot/Image* AnyKernel3
-cd AnyKernel3/ && zip -r9 AnyKernel3-update.zip * -x .git README.md *placeholder && cd ..
+${CROSS_COMPILE}strip -g drivers/net/wireless/qcacld-2.0/wlan.ko
+mkdir -p AnyKernel3/modules/system/lib/modules/qca_cld
+cp drivers/net/wireless/qcacld-2.0/wlan.ko AnyKernel3/modules/system/lib/modules/qca_cld/qca_cld_wlan.ko
+cd AnyKernel3/ && zip -r9 AnyKernel3-update.zip * -x .git README.md *placeholder *.zip && cd ..
 
 # qrencode -t ansiutf8 $(curl bashupload.com -T AnyKernel3-update.zip | grep -Eo "http:\/\/([^\/]*)\/(.*)$")
 for ((i = 0 ; i < 20 ; i++ )); do 
 	if adb devices | grep -qw device; then
 		adb reboot recovery
+		sleep 15
 	elif adb devices | grep -q recovery; then
 		adb shell twrp sideload
 	elif adb devices | grep -q sideload; then
 		adb sideload AnyKernel3/AnyKernel3-update.zip
-		sleep 2
+		sleep 3
 		adb reboot
 		break
 	else
@@ -46,5 +51,6 @@ for ((i = 0 ; i < 20 ; i++ )); do
 done
 
 #cd ..
+rm -rf AnyKernel3/
 #rm -rf AnyKernel3/Image*
 #rm -rf AnyKernel3/AnyKernel3-update.zip
